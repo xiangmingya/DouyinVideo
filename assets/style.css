@@ -1,0 +1,208 @@
+/* 抖音视频插件样式文件 */
+
+/* 抖音视频容器基础样式 */
+.douyin-video-container,
+.douyin-video-wrapper,
+body .douyin-video-container,
+article .douyin-video-container,
+.entry-content .douyin-video-container,
+.post-content .douyin-video-container,
+div[data-type="dy"] {
+    /* 核心布局属性 - 使用 !important 防止主题覆盖 */
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+
+    /* 装饰性属性 - 允许用户自定义覆盖 */
+    margin: 20px auto;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: none;
+    min-height: 0;
+}
+
+/* 响应式高度设置 - 桌面端 */
+@media (min-width: 730px) {
+    .douyin-video-container,
+    .douyin-video-wrapper,
+    body .douyin-video-container,
+    article .douyin-video-container,
+    div[data-type="dy"] {
+        width: min(730px, 100%) !important;
+        aspect-ratio: 16 / 9 !important;
+    }
+}
+
+/* 响应式高度设置 - 移动端 */
+@media (max-width: 729px) {
+    .douyin-video-container,
+    .douyin-video-wrapper,
+    body .douyin-video-container,
+    article .douyin-video-container,
+    div[data-type="dy"] {
+        width: min(324px, 100%) !important;
+        aspect-ratio: 9 / 16 !important;
+    }
+}
+
+/* 响应式高度设置 - 小屏幕 */
+@media (max-width: 320px) {
+    .douyin-video-container,
+    .douyin-video-wrapper,
+    body .douyin-video-container,
+    article .douyin-video-container,
+    div[data-type="dy"] {
+        width: 100% !important;
+        padding: 0;
+    }
+}
+
+/* 播放图标 */
+.douyin-video-container:before,
+.douyin-video-wrapper:before,
+div[data-type="dy"]:before {
+    content: "▶" !important;
+    position: absolute !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+
+    /* 可自定义的装饰属性 */
+    font-size: 4em;
+    line-height: 1;
+    opacity: 0.15;
+    color: #fff;
+}
+
+/* iframe样式 */
+.douyin-video-container iframe,
+.douyin-video-wrapper iframe,
+body .douyin-video-container iframe,
+article .douyin-video-container iframe,
+.entry-content .douyin-video-container iframe,
+.post-content .douyin-video-container iframe,
+div[data-type="dy"] iframe,
+body article embed iframe,
+body article iframe,
+article embed iframe,
+article iframe {
+    /* 核心布局属性 */
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+
+    /* 装饰性属性 - 允许自定义 */
+    border: none;
+    border-radius: 8px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    align-self: flex-start;
+    z-index: 2;
+    transition: height 0.3s ease;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* webkit滚动条隐藏 */
+.douyin-video-container iframe::-webkit-scrollbar,
+.douyin-video-wrapper iframe::-webkit-scrollbar,
+body .douyin-video-container iframe::-webkit-scrollbar,
+article .douyin-video-container iframe::-webkit-scrollbar,
+div[data-type="dy"] iframe::-webkit-scrollbar,
+body article iframe::-webkit-scrollbar,
+article iframe::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* 抖音hover效果 */
+.douyin-video-container[data-type="dy"] iframe:hover,
+.douyin-video-wrapper[data-type="dy"] iframe:hover,
+div[data-type="dy"] iframe:hover {
+    height: calc(100% + 35px) !important;
+}
+
+/* 错误提示样式 */
+.douyin-video-error {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    margin: 20px auto;
+    max-width: 600px;
+    font-size: 14px;
+}
+
+/* 加载动画 */
+.douyin-video-container:not(.loaded),
+.douyin-video-wrapper:not(.loaded),
+div[data-type="dy"]:not(.loaded) {
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+}
+
+.douyin-video-container:not(.loaded):before,
+.douyin-video-wrapper:not(.loaded):before,
+div[data-type="dy"]:not(.loaded):before {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.3; }
+}
+
+/* 强制移除边框 - 某些主题会强制添加边框 */
+* .douyin-video-container,
+* .douyin-video-wrapper,
+*[data-type="dy"] {
+    border: none !important;
+}
+
+* .douyin-video-container iframe,
+* .douyin-video-wrapper iframe,
+*[data-type="dy"] iframe {
+    border: none !important;
+    margin: 0 !important;
+}
+
+/* ========== 后台编辑器专用样式 ========== */
+
+/* 编辑器按钮样式 */
+#wmd-douyin-button {
+    display: inline-block !important;
+    width: 22px !important;
+    height: 23px !important;
+    line-height: 25px !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    border-radius: 3px !important;
+    margin-right: 1px !important;
+    position: relative !important;
+}
+
+#wmd-douyin-button:hover {
+    background: #e0e0e0 !important;
+    border-color: #999 !important;
+}
+
+#wmd-douyin-button span {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    line-height: 25px !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    color: #333 !important;
+}
