@@ -1,37 +1,42 @@
 /* 抖音视频插件样式文件 */
 
 /* 仅作用于插件自身容器，避免影响站点内其它 iframe */
-.douyin-video-container[data-type="dy"] {
+.xiangming-douyin-embed.douyin-video-container[data-type="dy"] {
     position: relative;
-    display: block;
-    width: min(100%, 420px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 380px);
     max-width: 100%;
-    aspect-ratio: var(--douyin-video-ratio, 9 / 16);
+    max-height: calc(80vh - 24px);
     margin: 20px auto;
     padding: 0;
     box-sizing: border-box;
     overflow: hidden;
-    background: linear-gradient(135deg, #111 0%, #2b2b2b 100%);
+    aspect-ratio: 0.4821;
+    background: #000;
     color: #fff;
     border: 0;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-@media (min-width: 768px) {
-    .douyin-video-container[data-type="dy"] {
-        width: min(100%, 460px);
+@media (min-width: 880px) {
+    .xiangming-douyin-embed.douyin-video-container[data-type="dy"] {
+        width: min(100%, 795px);
+        max-height: calc(80vh - 24px);
+        aspect-ratio: 16 / 9;
     }
 }
 
 @media (max-width: 320px) {
-    .douyin-video-container[data-type="dy"] {
+    .xiangming-douyin-embed.douyin-video-container[data-type="dy"] {
         width: 100%;
         margin: 16px auto;
     }
 }
 
-.douyin-video-container[data-type="dy"]::before {
+.xiangming-douyin-embed.douyin-video-container[data-type="dy"]::before {
     content: "▶";
     position: absolute;
     inset: 50% auto auto 50%;
@@ -44,7 +49,7 @@
     color: #fff;
 }
 
-.douyin-video-container[data-type="dy"] iframe {
+.xiangming-douyin-embed.douyin-video-container[data-type="dy"] iframe {
     position: relative;
     z-index: 2;
     display: block;
@@ -57,17 +62,31 @@
     border: 0 !important;
     border-radius: inherit;
     background: transparent;
+    align-self: flex-start;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.douyin-video-container[data-type="dy"] iframe::-webkit-scrollbar {
+.xiangming-douyin-embed.douyin-video-container[data-type="dy"] iframe::-webkit-scrollbar {
     display: none;
     width: 0;
     height: 0;
 }
 
-/* 错误提示样式 */
+.xiangming-douyin-embed.douyin-video-container[data-type="dy"]:not(.loaded) {
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+}
+
+.xiangming-douyin-embed.douyin-video-container[data-type="dy"]:not(.loaded)::before {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.xiangming-douyin-embed.douyin-video-container[data-type="dy"] iframe:hover {
+    height: calc(100% + 35px) !important;
+    margin: 0 0 -35px !important;
+}
+
+.xiangming-douyin-error,
 .douyin-video-error {
     background: #f8f8f8;
     border: 1px solid #ddd;
@@ -80,15 +99,6 @@
     font-size: 14px;
 }
 
-/* 加载动画 */
-.douyin-video-container[data-type="dy"]:not(.loaded) {
-    background: linear-gradient(135deg, #000 0%, #333 100%);
-}
-
-.douyin-video-container[data-type="dy"]:not(.loaded)::before {
-    animation: pulse 2s ease-in-out infinite;
-}
-
 @keyframes pulse {
     0%, 100% { opacity: 0.15; }
     50% { opacity: 0.3; }
@@ -96,7 +106,6 @@
 
 /* ========== 后台编辑器专用样式 ========== */
 
-/* 编辑器按钮样式 */
 #wmd-douyin-button {
     display: inline-block !important;
     width: 22px !important;

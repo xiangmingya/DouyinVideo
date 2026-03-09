@@ -119,18 +119,18 @@ class DouyinVideo_Plugin implements Typecho_Plugin_Interface
         curl_close($ch);
 
         if ($httpCode !== 200 || !$response) {
-            return '<div class="douyin-video-error">抖音视频加载失败，请检查视频ID是否正确</div>';
+            return '<div class="douyin-video-error xiangming-douyin-error">抖音视频加载失败，请检查视频ID是否正确</div>';
         }
 
         $data = json_decode($response, true);
 
         if (!$data || $data['err_no'] !== 0) {
             $errorMsg = isset($data['err_msg']) ? $data['err_msg'] : '未知错误';
-            return '<div class="douyin-video-error">抖音视频加载失败：' . htmlspecialchars($errorMsg) . '</div>';
+            return '<div class="douyin-video-error xiangming-douyin-error">抖音视频加载失败：' . htmlspecialchars($errorMsg) . '</div>';
         }
 
         if (!isset($data['data']['iframe_code'])) {
-            return '<div class="douyin-video-error">抖音视频数据格式错误</div>';
+            return '<div class="douyin-video-error xiangming-douyin-error">抖音视频数据格式错误</div>';
         }
 
         $iframeCode = $data['data']['iframe_code'];
@@ -147,7 +147,7 @@ class DouyinVideo_Plugin implements Typecho_Plugin_Interface
             $iframeCode
         );
 
-        return '<div class="douyin-video-container douyin-video-wrapper" data-type="dy">' . $iframeCode . '</div>';
+        return '<div class="douyin-video-container douyin-video-wrapper xiangming-douyin-video xiangming-douyin-embed" data-type="dy">' . $iframeCode . '</div>';
     }
 
     /**
